@@ -20,10 +20,11 @@
 ; Desenha um disco sólido (bola) em uma cena.
 ; Exemplo: (desenha-uma-cena B1) =
 (define (desenha-uma-cena uma-bola)
-    (place-image (circle  (bola-raio uma-bola) "solid" (bola-cor uma-bola))
-                (bola-x uma-bola)
-                (bola-y uma-bola)
-                (empty-scene LARG ALT)
+    (place-image
+        (circle  (bola-raio uma-bola) "solid" (bola-cor uma-bola))
+        (bola-x uma-bola)
+        (bola-y uma-bola)
+        (empty-scene LARG ALT)
     )
 )
 
@@ -31,12 +32,13 @@
 ; Dada uma bola, e cria uma outra, modificando a posição da bola.
 ; Exemplo: (move-bola B1) = B2
 (define (move-bola uma-bola)
-    (make-bola (+ (bola-x uma-bola) (bola-incr-x uma-bola))
-                (+ (bola-y uma-bola) (bola-incr-y uma-bola))
-                (bola-incr-x uma-bola)
-                (bola-incr-y uma-bola)
-                (bola-cor uma-bola)
-                (bola-raio uma-bola)
+    (make-bola
+        (+ (bola-x uma-bola) (bola-incr-x uma-bola))
+        (+ (bola-y uma-bola) (bola-incr-y uma-bola))
+        (bola-incr-x uma-bola)
+        (bola-incr-y uma-bola)
+        (bola-cor uma-bola)
+        (bola-raio uma-bola)
     )
 )
 
