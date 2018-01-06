@@ -65,7 +65,7 @@
             empty
         ]
         [else
-            (cons  (desenha-uma-cena uma-bola) (move-até-que-fora (move-bola uma-bola)))
+            (cons (desenha-uma-cena uma-bola) (move-até-que-fora (move-bola uma-bola)))
         ]
     )
 )

@@ -19,7 +19,3 @@
         ]
     )
 )
-
-(define (colisao-bolha? posx posy raio)
-    ;aaaaa
-)
