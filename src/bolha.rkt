@@ -1,10 +1,11 @@
 (module bolha racket
     (require "fisica.rkt")
+    (require "objeto.rkt")
 
     (provide (all-defined-out))
 
     ; Um elemento do tipo Bolha é (make-bolha x y dx dy resistencia cor raio) tal que:
-    ;   x: posn, posicao utilizando x e y
+    ;   x: coord, posicao utilizando x e y
     ;   dx: Número, velocidade no eixo x
     ;   dy: Número, velocidade no eixo y
     ;   resistencia: Numero, resistencia da bolha
@@ -19,7 +20,7 @@
         (cond
             [(empty? objeto-colisao)
                 (make-bolha
-                    (make-posn
+                    (make-coord
                         (passo-pos (bolha-pos uma-bolha) (bolha-dx uma-bolha) delta)
                         (passo-pos (bolha-pos uma-bolha) (bolha-dy uma-bolha) delta)
                     )
@@ -39,28 +40,29 @@
     (define (colisao-bolha? pos-b pos-o bbox raio)
         (local
             (
-                (define delta-x (abs (- (posn-x pos-b) (posn-x pos-o))))
-                (define distancia-ate-bolha-y (abs (- (posn-y pos-b) (posn-y pos-o))))
+                (define delta-x (abs (- (coord-x pos-b) (coord-x pos-o))))
+                (define distancia-ate-bolha-y (abs (- (coord-y pos-b) (coord-y pos-o))))
+                (define distancia-ate-bolha-x (abs (- (coord-x pos-b) (coord-x pos-o))))
             )
             (and
-                (< distancia-ate-bolha-x (+ (posn-x bbox) raio))
-                (< distancia-ate-bolha-y (+ (posn-y bbox) raio))
+                (< distancia-ate-bolha-x (+ (coord-x bbox) raio))
+                (< distancia-ate-bolha-y (+ (coord-y bbox) raio))
             )
         )
     )
 
     (define (bolha-fora-limites? pos-b raio)
         (and
-            (<= 0 (+ (posn-x pos-b) raio) LARG)
-            (<= 0 (+ (posn-y pos-b) raio) ALT)
+            (<= 0 (+ (coord-x pos-b) raio) LARG)
+            (<= 0 (+ (coord-y pos-b) raio) ALT)
         )
     )
 
     (define (quadrante-colisao pos-b pos-o)
         (local
             (
-                (define delta-x (- (posn-x pos-b) (posn-x pos-o)))
-                (define delta-y (- (posn-y pos-b) (posn-y pos-o)))
+                (define delta-x (- (coord-x pos-b) (coord-x pos-o)))
+                (define delta-y (- (coord-y pos-b) (coord-y pos-o)))
             )
             (cond
                 [(and (> 0 delta-x) (< 0 delta-y))

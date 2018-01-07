@@ -1,16 +1,15 @@
-(require lang/posn)
+(require 2htdp/image)
 (require "src/bolha.rkt")
 (require "src/objeto.rkt") 
+(require "src/fisica.rkt") 
 
-(define ALT 400)
-(define LARG 600)
 
 (define canhao
     (make-objeto
-        (make-posn 0 (- ALT 10))
-        (make-posn 10 10)
+        (make-coord 0 (- ALT 10))
+        (make-coord 10 10)
         false
-        "bin/cannon.jpg"
+        "bin/cannon.png"
     )
 )
 
@@ -18,10 +17,10 @@
     (list
         canhao
         (make-objeto
-            (make-posn 200 (- ALT 10))
-            (make-posn 10 10)
+            (make-coord 200 (- ALT 10))
+            (make-coord 10 10)
             false
-            "bin/rock.jpg"
+            "bin/rock.png"
         )
     )
 )
