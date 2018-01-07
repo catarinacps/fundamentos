@@ -1,21 +1,25 @@
-(define GRAV 9.8)
-(define VEL_TERM_Y -100)
+(module fisica racket
+    (provide (all-defined-out))
 
-(define (delta-tempo anterior)
-    (- (current-seconds) anterior)
-)
+    (define GRAV 9.8)
+    (define VEL_TERM_Y -100)
 
-(define (passo-pos posicao vel delta)
-    (+ posicao (* vel delta))
-)
+    (define (delta-tempo anterior)
+        (- (current-seconds) anterior)
+    )
 
-(define (passo-gravidade-vely dy delta)
-    (cond
-        [(<= dy VEL_TERM_Y)
-            VEL_TERM_Y
-        ]
-        [else
-            (+ dy (* GRAV delta))
-        ]
+    (define (passo-pos posicao vel delta)
+        (+ posicao (* vel delta))
+    )
+
+    (define (passo-gravidade-vely dy delta)
+        (cond
+            [(<= dy VEL_TERM_Y)
+                VEL_TERM_Y
+            ]
+            [else
+                (+ dy (* GRAV delta))
+            ]
+        )
     )
 )
