@@ -75,7 +75,9 @@
         ]
     )
 )
-
+; colisao-bolha?: Coord Coord Coord Numero -> Booleano
+; Dadas a posição da bolha e do objeto, determina se eles colidem, retornando true caso sim 
+; e false no caso contrário
 (define (colisao-bolha? pos-b pos-o bbox raio)
     (local
         [
@@ -89,7 +91,9 @@
         )
     )
 )
-
+ ; bolha-fora-limites: Coord Numero -> Booleano
+ ; Dadas as posição da bolha e seu raio, determina se a bolha está fora dos limites do jogo, retornando True em caso positivo
+ ; e false em caso negativo
 (define (bolha-fora-limites? pos-b raio)
     (or
         (>= 0 (- LARG (+ (coord-x pos-b) raio)))
@@ -99,6 +103,8 @@
     )
 )
 
+; quadrante-colisao: Coord Coord -> Numero
+; Determina o quadrante da bolha que ocorreu a colisão, retornando o numero do determinado quadrante
 (define (quadrante-colisao pos-b pos-o)
     (local
         [
@@ -124,7 +130,9 @@
         )
     )
 )
-
+; reflete-vel-x: Numero Numero -> Numero
+; Determina a nova velocidade na coordenada X de acordo com o quadrante em que ocorreu a colisão.
+; Retorna a nova velocidade
 (define (reflete-vel-x dx quadrante)
     (cond
         [(and (= quadrante 1) (< dx 0))
@@ -144,7 +152,9 @@
         ]
     )
 )
-
+ ; reflete-vel-y: Numero Numero -> Numero
+ ; Determina a nova velocidade na coordenada Y de acordo com o quadrante em que ocorreu a colisão.
+ ; Retorna a nova velocidade
 (define (reflete-vel-y dy quadrante)
     (cond
         [(and (= quadrante 1) (> dy 0))
@@ -165,6 +175,9 @@
     )
 )
 
+  ; rebate-bolha: Bolha Coord -> Bolha
+  ; Rebata a bolha de acordo com sua posição e a do objeto com quem esta colidindo.
+  ; Retorna uma nova bolha rebatida
 (define (rebate-bolha uma-bolha pos-o delta)
     (local
         [
@@ -222,10 +235,13 @@
         )
     )
 )
-
+;desenha-uma-cena: Lista de Bolhas Lista de Objetos -> Cena
+; Cria e posiciona as bolhas e objetos em uma cena
 (define (desenha-uma-cena lista-bolhas lista-obj)
     (local
-        [
+        [   
+            ;cria-bolhas: Lista de Bolhas -> Circulo
+            ; Desenha um circulo para cada uma das bolhas na lista de bolhas de acordo com seu raio.
             (define (cria-bolhas ldb)
                 (cond
                     [(empty? ldb)
@@ -239,6 +255,8 @@
                     ]
                 )
             )
+            ;cria-objetos: Lista de Objetos- > Bitmap
+            ; Desenha a determinada imagem do objeto na cena.
             (define (cria-objetos ldo)
                 (cond
                     [(empty? ldo)
@@ -252,6 +270,8 @@
                     ]
                 )
             )
+            ;lista-posicoes: Lista de Objetos (Objeto -> Coord) -> Lista de Coord
+            ; Retorna uma lista de coordenadas x  y para uma determinada lista de objetos.
             (define (lista-posicoes ldo funcao-pos)
                 (cond
                     [(empty? ldo)
@@ -269,6 +289,8 @@
                 )
             )
         ]
+
+    
         (place-images
             (append (cria-bolhas lista-bolhas) (cria-objetos lista-obj))
             (append (lista-posicoes lista-bolhas bolha-pos) (lista-posicoes lista-obj objeto-pos))
