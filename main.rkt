@@ -1,4 +1,5 @@
 (require 2htdp/image)
+(require 2htdp/universe)
 (require "src/bolha.rkt")
 (require "src/objeto.rkt") 
 (require "src/fisica.rkt") 
@@ -6,7 +7,7 @@
 
 (define canhao
     (make-objeto
-        (make-coord 0 (- ALT 10))
+        (make-coord 50 (- ALT 30))
         (make-coord 10 10)
         false
         "bin/cannon.png"
@@ -29,8 +30,8 @@
     (list
         (make-bolha
             (objeto-pos canhao)
-            10
-            -20
+            1
+            -2
             0.75
             'blue
             10
@@ -40,7 +41,7 @@
 
 (define (desenha-uma-cena lista-bolhas lista-obj)
     (local
-        (
+        [
             (define (cria-bolhas ldb)
                 (cond
                     [(empty? ldb)
@@ -61,7 +62,7 @@
                     ]
                     [else
                         (cons
-                            (bitmap (objeto-caminho (first ldo))) 
+                            (printf (objeto-caminho (first ldo)))
                             (cria-objetos (rest ldo))
                         )
                     ]
@@ -77,7 +78,7 @@
                     ]
                 )
             )
-        )
+        ]
         (place-images
             (append (cria-bolhas lista-bolhas) (cria-objetos lista-obj))
             (append (lista-posicoes lista-bolhas bolha-pos) (lista-posicoes lista-obj objeto-pos))
@@ -88,7 +89,7 @@
 
 (define (constroi-animacao lista-bolhas lista-obj tempo)
     (local
-        (
+        [
             (define (bolhas-em-cena ldb)
                 (cond
                     [(empty? ldb)
@@ -157,7 +158,7 @@
                     ]
                 )
             )
-        )
+        ]
         (cond
             [(empty? (bolhas-em-cena lista-bolhas))
                 empty

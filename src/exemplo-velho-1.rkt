@@ -1,6 +1,6 @@
 ;; The first three lines of this file were inserted by DrRacket. They record metadata
 ;; about the language level of this file in a form that our tools can easily process.
-#reader(lib "htdp-intermediate-reader.ss" "lang")((modname MIIIIIIIIIITICO) (read-case-sensitive #t) (teachpacks ((lib "hangman.ss" "teachpack" "htdp") (lib "draw.ss" "teachpack" "htdp"))) (htdp-settings #(#t constructor repeating-decimal #f #t none #f ((lib "hangman.ss" "teachpack" "htdp") (lib "draw.ss" "teachpack" "htdp")))))
+#reader(lib "htdp-intermediate-reader.ss" "lang")((modname exemplo-velho-1) (read-case-sensitive #t) (teachpacks ((lib "hangman.ss" "teachpack" "htdp") (lib "draw.ss" "teachpack" "htdp"))) (htdp-settings #(#t constructor repeating-decimal #f #t none #f ((lib "hangman.ss" "teachpack" "htdp") (lib "draw.ss" "teachpack" "htdp")) #f)))
 ;nomes: LEONARDO EICH
 ;;EVANDRO LUIZ DA LUZ
 ;;VICTOR PEREIRA SANTOS
@@ -9,7 +9,7 @@
 (define ALTURA 400)
 (define LARGURA 400)
 
-(define AGUARDA .7)
+(define AGUARDA .3)
 
 
 

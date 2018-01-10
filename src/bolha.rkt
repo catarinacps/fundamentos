@@ -39,11 +39,11 @@
 
     (define (colisao-bolha? pos-b pos-o bbox raio)
         (local
-            (
+            [
                 (define delta-x (abs (- (coord-x pos-b) (coord-x pos-o))))
                 (define distancia-ate-bolha-y (abs (- (coord-y pos-b) (coord-y pos-o))))
                 (define distancia-ate-bolha-x (abs (- (coord-x pos-b) (coord-x pos-o))))
-            )
+            ]
             (and
                 (< distancia-ate-bolha-x (+ (coord-x bbox) raio))
                 (< distancia-ate-bolha-y (+ (coord-y bbox) raio))
@@ -52,18 +52,20 @@
     )
 
     (define (bolha-fora-limites? pos-b raio)
-        (and
-            (<= 0 (+ (coord-x pos-b) raio) LARG)
-            (<= 0 (+ (coord-y pos-b) raio) ALT)
+        (or
+            (>= 0 (- LARG (+ (coord-x pos-b) raio)))
+            (>= 0 (- ALT (+ (coord-y pos-b) raio)))
+            (< 0 (+ (coord-x pos-b) raio))
+            (< 0 (+ (coord-y pos-b) raio))
         )
     )
 
     (define (quadrante-colisao pos-b pos-o)
         (local
-            (
+            [
                 (define delta-x (- (coord-x pos-b) (coord-x pos-o)))
                 (define delta-y (- (coord-y pos-b) (coord-y pos-o)))
-            )
+            ]
             (cond
                 [(and (> 0 delta-x) (< 0 delta-y))
                     1
@@ -126,9 +128,9 @@
 
     (define (rebate-bolha uma-bolha pos-o)
         (local
-            (
+            [
                 (define quadrante (quadrante-colisao (bolha-pos uma-bolha) pos-o))
-            )
+            ]
             (make-bolha
                 (passo-pos uma-bolha)
                 (reflete-vel-x (bolha-dx uma-bolha) quadrante)
